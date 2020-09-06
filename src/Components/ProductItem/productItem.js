@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const ProductItemComponent = () => {
-  return (
-    <div className='card p-2 my-2'>
-      <img alt='img' />
-      <p>Tên sản phẩm</p>
-      <button className='btn btn-success'>Thử đồ</button>
-    </div>
-  );
-};
+class ProductItemComponent extends Component {
+  render() {
+    const { name, imgSrc_jpg } = this.props.item;
+    return (
+      <div className='card p-2 my-2'>
+        <img alt='img' src={imgSrc_jpg} />
+        <p>{name}</p>
+        <button
+          className='btn btn-success'
+          onClick={() => this._chooseCloth(this.props.item)}
+        >
+          Thử đồ
+        </button>
+      </div>
+    );
+  }
 
-export default ProductItemComponent;
+  _chooseCloth = (cloth) => {
+    this.props.dispatch({
+      type: 'SET_CLOTH',
+      payload: {
+        type: cloth.type,
+        img: cloth.imgSrc_png,
+      },
+    });
+  };
+}
+
+export default connect()(ProductItemComponent);

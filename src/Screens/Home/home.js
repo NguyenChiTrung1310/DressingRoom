@@ -3,6 +3,7 @@ import HeaderComponent from '../../Layouts/Header/header';
 import FooterComponent from '../../Layouts/Footer/footer';
 import Categories from '../../Components/Categories/categories';
 import ProductsComponent from '../../Components/Products/products';
+import ModelComponent from '../../Components/Model/model';
 
 const Home = () => {
   return (
@@ -14,7 +15,9 @@ const Home = () => {
             <Categories />
             <ProductsComponent />
           </div>
-          <div className='col-6'></div>
+          <div className='col-6'>
+            <ModelComponent />
+          </div>
         </div>
       </div>
       <FooterComponent />

@@ -1,13 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const categories = () => {
-  return (
-    <div className='btn -group p-3'>
-      <button className='btn btn-secondary'>Quần</button>
-      <button className='btn btn-secondary'>Áo</button>
-      <button className='btn btn-secondary'>Tóc</button>
-    </div>
-  );
-};
+class categories extends Component {
+  _choosenCategory = (payload) => {
+    this.props.dispatch({
+      type: 'SET_CATEGORY',
+      payload,
+    });
+  };
 
-export default categories;
+  render() {
+    return (
+      <div className='btn -group p-3'>
+        {this.props.categoryList.map((item, index) => (
+          <button
+            key={index}
+            className={
+              this.props.choosenCategory === item.type
+                ? 'btn btn-primary'
+                : 'btn btn-secondary'
+            }
+            onClick={() => this._choosenCategory(item.type)}
+          >
+            {item.showName}
+          </button>
+        ))}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => ({
+  categoryList: state.categories,
+  choosenCategory: state.choosenCategory,
+});
+
+export default connect(mapStateToProps)(categories);
