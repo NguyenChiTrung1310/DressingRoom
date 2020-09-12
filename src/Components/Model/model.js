@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import style from './style.module.css';
+import { connect } from 'react-redux';
+import classes from './style.module.css';
 
 class ModelComponent extends Component {
   constructor(props) {
@@ -45,9 +47,40 @@ class ModelComponent extends Component {
           className={style.feetright}
           style={{ background: `url(${this.state.feetright})` }}
         ></div>
+        <div
+          className={classes.bikinitop}
+          style={{
+            backgroundImage: `url(${this.props.model.topclothes})`,
+            backgroundSize: 'cover',
+          }}
+        ></div>
+        <div
+          className={classes.bikinibottom}
+          style={{
+            backgroundImage: `url(${this.props.model.botclothes})`,
+            backgroundSize: 'cover',
+          }}
+        ></div>
+        <div
+          className={classes.feetleft}
+          style={{
+            backgroundImage: `url(${this.props.model.shoes})`,
+            backgroundSize: 'cover',
+          }}
+        ></div>
+        <div
+          className={classes.feetright}
+          style={{
+            backgroundImage: `url(${this.props.model.shoes})`,
+            backgroundSize: 'cover',
+          }}
+        ></div>
       </div>
     );
   }
 }
 
-export default ModelComponent;
+const mapStateToProps = (state) => ({
+  model: state.model,
+});
+export default connect(mapStateToProps)(ModelComponent);
